@@ -25,4 +25,16 @@ class Forest
     end
   end
 
+  def neighbors(acre)
+    neighbors = []
+    (-2..2).each do |x|
+      (-2..2).each do |y|
+        if !(x == 0 && y == 0)
+          neighbors << self.find((acre.x + x), (acre.y + y))
+        end
+      end
+    end
+    neighbors
+  end
+
 end

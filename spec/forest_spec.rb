@@ -1,4 +1,5 @@
 require 'rspec'
+require 'pry'
 require 'forest'
 
 describe :Forest do
@@ -23,6 +24,14 @@ describe :Forest do
       new_forest.stub(:rand).and_return(20)
       new_forest.randomize(10, 50)
       expect(new_forest.find(1,1).state).to eq 'forest'
+    end
+  end
+
+  describe 'neighbors' do
+    it 'finds neighbors in all directions within two acres' do
+      new_forest = Forest.new(10, 10)
+      new_acre = new_forest.find(5,5)
+      expect(new_forest.neighbors(new_acre).length).to eq 24
     end
   end
 
