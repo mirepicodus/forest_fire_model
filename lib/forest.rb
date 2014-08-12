@@ -10,4 +10,8 @@ class Forest
     end
   end
 
+  def find x, y
+    @all_acres.select {|acre| acre.x == x && acre.y == y}[0]
+  end
+
 end
