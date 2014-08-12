@@ -43,7 +43,7 @@ describe :Forest do
       new_acre.state = 'forest'
       new_acre1.state = 'fire'
       new_acre2.state = 'blazing'
-      expect(new_forest.neighbors_state(new_acre)).to eq 30
+      expect(new_forest.neighbors_state(new_acre)).to eq 20
     end
   end
 

@@ -42,9 +42,9 @@ class Forest
       chance_to_catch_fire = 0
       self.neighbors(acre).each do |neighbor|
         if neighbor.state == 'blazing'
-          chance_to_catch_fire += 20
+          (acre.x - neighbor.x).abs == 2 || (acre.y - neighbor.y).abs == 2 ? chance_to_catch_fire += 10 : chance_to_catch_fire += 20
         elsif neighbor.state == 'fire' || neighbor.state == 'smoldering'
-          chance_to_catch_fire += 10
+          (acre.x - neighbor.x).abs == 2 || (acre.y - neighbor.y).abs == 2 ? chance_to_catch_fire += 5 : chance_to_catch_fire += 10
         end
       end
     end
