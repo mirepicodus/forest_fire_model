@@ -1,5 +1,4 @@
 require 'rspec'
-require 'pry'
 require 'forest'
 
 describe :Forest do
@@ -32,6 +31,19 @@ describe :Forest do
       new_forest = Forest.new(10, 10)
       new_acre = new_forest.find(5,5)
       expect(new_forest.neighbors(new_acre).length).to eq 24
+    end
+  end
+
+  describe 'neighbors_state' do
+    it 'returns percentage chance of current cell catching fire if not already on fire' do
+      new_forest = Forest.new(10, 10)
+      new_acre = new_forest.find(5,5)
+      new_acre1 = new_forest.find(5,6)
+      new_acre2 = new_forest.find(5,7)
+      new_acre.state = 'forest'
+      new_acre1.state = 'fire'
+      new_acre2.state = 'blazing'
+      expect(new_forest.neighbors_state(new_acre)).to eq 30
     end
   end
 

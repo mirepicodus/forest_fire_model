@@ -37,4 +37,18 @@ class Forest
     neighbors
   end
 
+  def neighbors_state acre
+    if acre.state == 'forest'
+      chance_to_catch_fire = 0
+      self.neighbors(acre).each do |neighbor|
+        if neighbor.state == 'blazing'
+          chance_to_catch_fire += 20
+        elsif neighbor.state == 'fire' || neighbor.state == 'smoldering'
+          chance_to_catch_fire += 10
+        end
+      end
+    end
+    return chance_to_catch_fire
+  end
+
 end
