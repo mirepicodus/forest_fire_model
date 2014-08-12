@@ -17,4 +17,13 @@ describe :Forest do
     end
   end
 
+  describe 'randomize' do
+    it 'randomly sets acres to fire or forest based on inputs' do
+      new_forest = Forest.new(10, 10)
+      new_forest.stub(:rand).and_return(20)
+      new_forest.randomize(10, 50)
+      expect(new_forest.find(1,1).state).to eq 'forest'
+    end
+  end
+
 end

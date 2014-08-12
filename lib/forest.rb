@@ -14,4 +14,15 @@ class Forest
     @all_acres.select {|acre| acre.x == x && acre.y == y}[0]
   end
 
+  def randomize percent_on_fire, percent_forest
+    @all_acres.map do |acre|
+      random_state = rand(100)
+      if random_state <= percent_on_fire
+        acre.state = 'fire'
+      elsif random_state <= percent_on_fire + percent_forest
+        acre.state = 'forest'
+      end
+    end
+  end
+
 end

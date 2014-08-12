@@ -1,10 +1,10 @@
 class Acre
   attr_reader :x, :y
-  attr_accessor :alive
+  attr_accessor :state
 
   def initialize x, y
     @x = x
     @y = y
-    @alive = true
+    @state = ''
   end
 end
