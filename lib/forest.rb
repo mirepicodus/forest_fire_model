@@ -51,4 +51,18 @@ class Forest
     return chance_to_catch_fire
   end
 
+  def spread
+    self.all_acres.each do |acre|
+      if acre.state == 'fire'
+        acre.next_state = 'blazing'
+      elsif acre.state == 'blazing'
+        acre.next_state = 'smoldering'
+      elsif acre.state == 'smoldering'
+        acre.next_state = ''
+      elsif acre.state == 'forest'
+        rand(100) <= self.neighbors_state(acre) if acre.next_state = 'fire'
+      end
+    end
+  end
+
 end
