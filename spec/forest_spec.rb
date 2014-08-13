@@ -1,4 +1,5 @@
 require 'rspec'
+require 'pry'
 require 'forest'
 
 describe :Forest do
@@ -43,7 +44,7 @@ describe :Forest do
       new_acre.state = 'forest'
       new_acre1.state = 'fire'
       new_acre2.state = 'blazing'
-      expect(new_forest.neighbors_state(new_acre)).to eq 20
+      expect(new_forest.neighbors_state(new_acre)).to eq 4
     end
   end
 
@@ -56,7 +57,8 @@ describe :Forest do
       new_acre.state = 'forest'
       new_acre1.state = 'fire'
       new_acre2.state = 'blazing'
-      new_forest.stub(:rand).and_return(20)
+      new_forest.stub(:rand).and_return(4)
+      new_forest.spread
       expect(new_acre.state).to eq 'fire'
     end
   end

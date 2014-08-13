@@ -5,6 +5,6 @@ class Acre
   def initialize x, y
     @x = x
     @y = y
-    @state = ''
+    @state = 'barren'
   end
 end

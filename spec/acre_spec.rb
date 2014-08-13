@@ -1,4 +1,5 @@
 require 'rspec'
+require 'pry'
 require 'acre'
 
 describe :Acre do

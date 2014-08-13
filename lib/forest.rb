@@ -40,11 +40,11 @@ class Forest
   def neighbors_state acre
     if acre.state == 'forest'
       chance_to_catch_fire = 0
-      self.neighbors(acre).each do |neighbor|
+      self.neighbors(acre).compact.each do |neighbor|
         if neighbor.state == 'blazing'
-          (acre.x - neighbor.x).abs == 2 || (acre.y - neighbor.y).abs == 2 ? chance_to_catch_fire += 10 : chance_to_catch_fire += 20
+          (acre.x - neighbor.x).abs == 2 || (acre.y - neighbor.y).abs == 2 ? chance_to_catch_fire += 2 : chance_to_catch_fire += 4
         elsif neighbor.state == 'fire' || neighbor.state == 'smoldering'
-          (acre.x - neighbor.x).abs == 2 || (acre.y - neighbor.y).abs == 2 ? chance_to_catch_fire += 5 : chance_to_catch_fire += 10
+          (acre.x - neighbor.x).abs == 2 || (acre.y - neighbor.y).abs == 2 ? chance_to_catch_fire += 1 : chance_to_catch_fire += 2
         end
       end
     end
@@ -58,10 +58,19 @@ class Forest
       elsif acre.state == 'blazing'
         acre.next_state = 'smoldering'
       elsif acre.state == 'smoldering'
-        acre.next_state = ''
+        acre.next_state = 'barren'
+      elsif acre.state == 'barren'
+        acre.next_state = 'barren'
       elsif acre.state == 'forest'
-        rand(100) <= self.neighbors_state(acre) if acre.next_state = 'fire'
+        if rand(100) <= self.neighbors_state(acre)
+          acre.next_state = 'fire'
+        else
+          acre.next_state = 'forest'
+        end
       end
+    end
+    self.all_acres.each do |acre|
+      acre.state = acre.next_state
     end
   end
 
