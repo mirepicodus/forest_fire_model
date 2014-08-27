@@ -1,21 +1,25 @@
 class Forest
-  attr_accessor :all_acres
+  @@all_acres = []
+
+  def self.all_acres
+    @@all_acres
+  end
 
   def initialize width, length
-    @all_acres = []
+    @@all_acres = []
     (1..width).each do |x|
       (1..length).each do |y|
-        @all_acres << Acre.new(x, y)
+        @@all_acres << Acre.new(x, y)
       end
     end
   end
 
   def find x, y
-    @all_acres.select {|acre| acre.x == x && acre.y == y}[0]
+    @@all_acres.select {|acre| acre.x == x && acre.y == y}[0]
   end
 
   def randomize percent_on_fire, percent_forest
-    @all_acres.map do |acre|
+    @@all_acres.map do |acre|
       random_state = rand(100)
       if random_state <= percent_on_fire
         acre.state = 'fire'
@@ -52,7 +56,7 @@ class Forest
   end
 
   def spread
-    self.all_acres.each do |acre|
+    Forest.all_acres.each do |acre|
       if acre.state == 'fire'
         acre.next_state = 'blazing'
       elsif acre.state == 'blazing'
@@ -69,7 +73,7 @@ class Forest
         end
       end
     end
-    self.all_acres.each do |acre|
+    Forest.all_acres.each do |acre|
       acre.state = acre.next_state
     end
   end
